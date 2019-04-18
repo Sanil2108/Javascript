@@ -1,0 +1,196 @@
+<html>
+    <head>
+
+        <script>
+            let allTds;
+
+            let clicks = 0;
+
+            let board= [
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]
+            ];
+
+            const gameover = ()=>{
+                console.log("Game over");
+                clicked = ()=>{};
+            }
+
+            let x = 0;
+            const moveNotificationUp = (initY, finalY) => {
+                let update = ((finalY - initY)/100) * x;
+                let noticaitionContainer = document.getElementById("notification_container");
+
+                console.log(initY - x);
+
+                x += 1;
+
+                noticaitionContainer.top = initY - x ;
+            }
+
+            const showNotification = (text) => {
+                let noticaitionContainer = document.getElementById("notification_container");
+                let newPositionY = 0.92 * window.innerHeight;
+                let oldPositionY = window.innerHeight;
+                // noticaitionContainer.style.top = window.innerHeight;
+                noticaitionContainer.style.visibility = "visible";
+
+                setInterval(moveNotificationUp(oldPositionY, newPositionY), 100);
+            };
+
+            const checkEndGame = () => {
+                for (let i =0; i<3; i++){
+                    let commonElements = board[i][0];
+                    let allElementsCommon = true;
+                    let commonElementsColumn = board[0][i];
+                    let allElementsCommonColumn = true;
+                    for(let j=0; j<3; j++){
+                        if(commonElements != board[i][j]){
+                            allElementsCommon = false;
+                        }
+                        if(commonElementsColumn != board[j][i]){
+                            allElementsCommonColumn = false
+                        }
+                    }
+
+                    if(allElementsCommon && commonElements != 0){
+                        gameover();
+                        return;
+                    }
+
+                    if(allElementsCommonColumn && commonElementsColumn != 0){
+                        gameover();
+                        return;
+                    }
+                }
+
+
+                if(board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != 0){
+                    gameover();
+                    return;
+                }
+
+                if(board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[2][0] != 0){
+                    gameover();
+                    return;
+                }
+            };
+
+            const clickedActual = (row, column, i) => {
+                if(board[row][column] == 0){
+
+                    console.log(`( ${row}, ${column} )`);
+
+                    if (clicks % 2 == 0){
+                        allTds[i].style.background = "#f00";
+                        board[row][column] = 1;
+                    }else{
+                        allTds[i].style.background = "#00f";
+                        board[row][column] = 2;
+                    }
+                    checkEndGame();
+
+                    clicks += 1;
+                }
+            };
+
+            let clicked = clickedActual;
+
+            const loadEvent = () => {
+                console.log("load");
+                allTds = document.getElementsByTagName("td");
+                for(let i=0; i<allTds.length; i++){
+                    allTds[i].addEventListener("click", function(){
+                        clicked( parseInt(((i)/3)) , ((i)%3) , i);
+                    });
+                }
+            };
+
+            window.onload = loadEvent;
+
+        </script>
+
+        <style>
+
+            body{
+                background: url(bg.jpg);
+            }
+
+            div.notification{
+                height: 6vh;
+                position: fixed;
+                visibility: hidden;
+                width: 30vw;
+                border-radius: 15px;
+                top: 92vh;
+                color: #000;
+                opacity: 0.8;
+                left: 35vw;
+                background: #bbb;
+            }
+
+
+            div.container{
+                border: 1px solid black;
+                height: 71%;
+                width: 40%;
+            }
+
+            tr{
+                height: 20vh;
+            }
+
+            td{
+                width: 20vh;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <div class="container">
+            <table border="1px">
+
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="notification" id="notification_container">
+        </div>
+    </body>
+</html>

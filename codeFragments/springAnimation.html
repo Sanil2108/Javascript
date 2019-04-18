@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <script>
+            let div;
+
+            const myInterpolator = (x) => {
+                const a = 36.5;
+                const n = -0.2;
+
+                
+
+                return -Math.exp(x/a) * Math.cos(n*x);
+            }
+
+            let currentX = 102;
+
+            const onDivClick = ()=>{
+                let interval = setInterval(
+                    ()=>{
+                        console.log("Hello");
+                        let currentTop = div.style.top;
+                        let currentTopPixels = Number(currentTop.substring(0, currentTop.length - 2));
+                        div.style.top = currentTopPixels + myInterpolator(currentX);
+                        currentX --;
+                        if(currentX <= -70){
+                            clearInterval(interval);
+                            currentX =102;
+                        }
+                    }, 16
+                );
+            }
+
+            window.onload = ()=>{
+                div = document.getElementsByTagName("div")[0];
+                let currentTop = div.style.top;
+                currentTop = Number(currentTop.substring(0, currentTop.length - 1));
+                currentTop = currentTop * window.innerHeight / 100;
+                div.style.top = currentTop + "px";
+
+                div.addEventListener("click", onDivClick);
+            }
+
+        </script>
+    </head>
+
+    <body>
+        <div style="height: 10%; width: 10%; position: fixed; left: 45%; top: 45%; background: #000"></div>
+
+    </body>
+</html>
