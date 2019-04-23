@@ -1,0 +1,54 @@
+<html>
+    <head>
+
+        <style>
+            div{
+                font-size: 20;
+                height: 120vh;
+            }
+        </style>
+        <script>
+            let b;
+
+            function eventHandle(event){
+                console.log("My listener called");
+                if(event.key == "ArrowUp" || event.key == "ArrowDown"){
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    let currentSize = b.style.fontSize;
+                    currentSize = Number(currentSize.substring(0, currentSize.length - 2));
+                    if(event.key == "ArrowUp"){
+                        if(currentSize < 35){
+                            currentSize = currentSize + 1;
+                        }else{
+                            b.innerHTML = "💥";
+                            window.removeEventListener("keydown", eventHandle);
+                        }
+                    }else{
+                        currentSize = currentSize - 1;
+                    }
+                    currentSize = currentSize + "px";
+
+                    b.style.fontSize = currentSize;
+
+                }
+            }
+
+            window.onload = ()=>{
+                b = document.getElementsByTagName("div")[0];
+                b.style.fontSize = "20px";
+                window.addEventListener("keydown", eventHandle);
+            };
+
+            
+
+        </script>
+    </head>
+
+    <body>
+        <div>
+        🎈
+        </div>
+    </body>
+</html>

@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <script src="fillWords.js"></script>
+        <script src="checkWords.js"></script>
+        <script src="controls.js"></script>
+        <script src="main.js"></script>
+        <script src="timer.js"></script>
+
+        <style>
+            div#background{
+                position: fixed;
+                height: 100vh;
+                width: 100vw;
+                opacity: 0.8;
+                top: 0;
+                left: 0;
+                background: url('background.jpg');
+            }
+
+            .containers{
+                opacity: 0.8;
+                background: #444;
+                border-radius: 10px;
+            }
+
+            .containerChildren{
+                margin: 10;
+                background: #aaa;
+                padding: 10;
+                border-radius: 10px;
+            }
+
+            div#mainContainer{
+                position: absolute;
+                top: 20vh;
+                left: 37.5vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                
+            }
+
+            div#wordsContainer{
+                width: 25vw;
+                height: 20vh;
+            }
+
+            div#wordsInput{
+                width: 25vw;
+                height: 20vh;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="background"></div>
+        <div id="mainContainer" class="containers">
+            <div id="wordsContainer" class="containerChildren">
+
+            </div>
+            <div id="wordsInput" class="containerChildren">
+
+            </div>
+        </div>
+
+        <div id="timer" class="containers" style="
+        height: 6vh;
+        width: 8vw;
+        left: 46vw;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        top: 0;
+        position: absolute;
+        ">
+            <div id="timerText" class="containerChildren" style="
+            height: 32%;
+            width: 75%;
+            margin: 5%;
+            padding-top: 15;
+            text-align: center;
+            position: absolute;
+            font-family: 'Courier New', Courier, monospace
+            ">
+
+            01:00
+
+            </div>
+        </div>
+
+        <div>
+            <div id="menuContainer" class="containers" style="
+            height:30vh; 
+            width:8vw; 
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            top: 35vh;
+            left: 92vw;
+            position: absolute;">
+                <div id="scoreField" class="containerChildren" style="
+                height: 45%;
+                margin: 5%;
+                padding: 0;
+                font-family: 'Courier New', Courier, monospace;
+                text-align: center;
+                line-height: 130%;
+                font-size: 100"></div>
+                <div id="restartButton" class="containerChildren" style="
+                height: 45%;
+                margin: 5%;
+                padding: 0">
+                    <div id="restartButtonImage" style="
+                    background: url('restart.png');
+                    height: 100%;
+                    width: 100%; 
+                    background-size: 80%;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                    background-position: center">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
