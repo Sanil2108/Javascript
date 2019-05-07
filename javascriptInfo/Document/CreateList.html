@@ -1,0 +1,23 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <ul>
+
+        </ul>
+        <script>
+            let items = [
+                "Hello", "Hello2", "Hello3", "<table>"
+            ];
+            let ul = document.querySelector("ul");
+            for(let i of items){
+                let li = document.createElement("li");
+                let liText = document.createTextNode(i+"");
+                li.appendChild(liText);
+                ul.appendChild(li);
+            }
+            
+        </script>
+    </body>
+</html>

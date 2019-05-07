@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        #field {
+            width: 200px;
+            height: 150px;
+            border: 10px solid black;
+            background-color: #00FF00;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body style="height:2000px">
+
+    Click on a field to move the ball there.
+    <br> The ball should never leave the field.
+
+
+    <div id="field">
+        <img src="https://en.js.cx/clipart/ball.svg" id="ball" style="position:relative"> . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+
+    <script>
+        window.onload = () => {
+            let animating = false;
+            let fieldTop = field.getBoundingClientRect().top + 10;
+            let fieldLeft = field.getBoundingClientRect().left + 10;
+            let ballHeight = ball.getBoundingClientRect().height;
+            let ballWidth = ball.getBoundingClientRect().width;
+
+            let oldBallLeft = ball.getBoundingClientRect().left;
+            let oldBallTop = ball.getBoundingClientRect().top;
+            field.onclick = (event) => {
+                let newBallLeft = event.clientX - fieldLeft - ballWidth / 2;
+                let newBallTop = event.clientY - fieldTop - ballHeight / 2;
+                
+                let leftDiff = (newBallLeft - oldBallLeft)/10
+                let topDiff = (newBallTop - oldBallTop)/10
+
+                animation = setInterval(()=>{
+                    oldBallLeft += leftDiff;
+                    oldBallTop += topDiff;
+                    if(newBallLeft < oldBallLeft + leftDiff && newBallLeft > oldBallLeft){
+                        oldBallLeft = newBallLeft;
+                    }
+
+                    if(newBallTop < oldBallTop + topDiff && newBallTop > oldBallTop){
+                        oldBallTop = newBallTop;
+                    }
+
+                    ball.style.left = oldBallLeft + "px";
+                    ball.style.top = oldBallTop + "px";
+                    if(oldBallLeft == newBallLeft){
+                        clearInterval(animation);
+                    }
+                    
+
+                    // ball.style.top = oldBallTop + "px";
+                }, 16);
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
